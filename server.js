@@ -6,6 +6,10 @@
 import express from "express";
 
 ///////// Import Logging Middleware
+import { logReq } from "./middleware/logger.js";
+
+///////// Import Error Handling Middleware
+import { globalErr } from "./middleware/error.js";
 
 
 ///////// Import routes
@@ -23,6 +27,8 @@ const app = express();
 
 
 /////// (Request) Middleware
+// my logging middleware (requirement)
+app.use(logReq);
 
 
 /////// View
@@ -35,10 +41,18 @@ const app = express();
 /////// Route
 
 
+//////////TESTING
+// app.get("/", (req, res) => {
+//   res.send("testing read!");
+// });
+//////////
+
+
 
 
 /////// Error Handling Middleware
-
+// this has to be at the end, after all routes
+app.use(globalErr);
 
 
 
