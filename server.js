@@ -1,3 +1,8 @@
+
+////////////////////// SBA 318: Express Server Application //////////////////////
+////// Project: GadgetShack (Backend Layer)
+
+
 import express from "express";
 
 ///////// Import Logging Middleware
@@ -13,7 +18,8 @@ import express from "express";
 
 
 /////// Setups
-
+const PORT = 3000;
+const app = express();
 
 
 /////// (Request) Middleware
@@ -37,3 +43,6 @@ import express from "express";
 
 
 /////// Listener
+app.listen(PORT, () => {
+    console.log(`Server is running on PORT: ${PORT}`);
+});
