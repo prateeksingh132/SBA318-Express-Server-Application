@@ -35,19 +35,31 @@ app.use(logReq);
 
 
 /////// View
-// View Engine setup
 // logic: creating a view engine to read .html files
+// i am using the exact logic from the warmup SBA here.
 app.engine("html", function (filePath, options, cb) {
     fs.readFile(filePath, (err, content) => {
         if (err) return cb(err);
+
+        // i am converting the content to string so i can replace text
         let rendered = content.toString();
-        // will replace placeholders
-        if (options.title) rendered = rendered.replace("#title#", options.title);
-        if (options.content) rendered = rendered.replace("#content#", options.content);
+
+        // replacing #title# and #content# placeholders in my html
+        // checking if options have title or content passed from the route
+        if (options.title) {
+            rendered = rendered.replace("#title#", options.title);
+        }
+
+        if (options.content) {
+            rendered = rendered.replace("#content#", options.content);
+        }
+
+        // return the final html string
         return cb(null, rendered);
     });
 });
 
+// View Engine setup
 app.set("views", "./views");
 app.set("view engine", "html");
 app.use(express.static("./styles")); // serve static files from the styles directory
