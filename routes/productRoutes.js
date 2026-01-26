@@ -1,6 +1,8 @@
 /////// API logic: All routes logic for gadgetshack product page
 
 import express from "express";
+
+// instance of router
 const router = express.Router();
 
 // importing the controller logic
@@ -15,7 +17,7 @@ import {
 
 
 // route definitions
-router.get("/", getAllProducts);           // view all products
+router.get("/", getAllProducts);           // get all products
 router.post("/", createProduct);           // create new product
 router.get("/:id/edit", showEditForm);     // show edit form
 router.patch("/:id", updateProduct);       // update product
