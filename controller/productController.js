@@ -53,6 +53,8 @@ export const getAllProducts = (req, res) => {
 // create new product
 export const createProduct = (req, res, next) => {
 
+    // Goal: I am going to add the ability to add (create) items.
+
 };
 
 // delete product
