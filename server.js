@@ -35,10 +35,22 @@ app.use(logReq);
 
 
 /////// View
-// View Engine Creation - creates a view engine, uses .html extension files
-
-
 // View Engine setup
+// logic: creating a view engine to read .html files
+app.engine("html", function (filePath, options, cb) {
+    fs.readFile(filePath, (err, content) => {
+        if (err) return cb(err);
+        let rendered = content.toString();
+        // will replace placeholders
+        if (options.title) rendered = rendered.replace("#title#", options.title);
+        if (options.content) rendered = rendered.replace("#content#", options.content);
+        return cb(null, rendered);
+    });
+});
+
+app.set("views", "./views");
+app.set("view engine", "html");
+app.use(express.static("./styles")); // serve static files from the styles directory
 
 
 /////// Route
@@ -49,9 +61,9 @@ app.use(logReq);
 //////////TESTING
 app.use("/products", productRoutes);
 
-app.get("/", (req, res) => {
-    res.send("<h1>TESTING: Server is working!</h1><a href='/products'>Go to Products</a>");
-});
+// app.get("/", (req, res) => {
+//     res.send("<h1>TESTING: Server is working!</h1><a href='/products'>Go to Products</a>");
+// });
 // app.get("/", (req, res) => {
 //   res.send("testing read!");
 // });
