@@ -47,7 +47,11 @@ app.use(logReq);
 
 
 //////////TESTING
-//app.use("/products", productRoutes);
+app.use("/products", productRoutes);
+
+app.get("/", (req, res) => {
+    res.send("<h1>TESTING: Server is working!</h1><a href='/products'>Go to Products</a>");
+});
 // app.get("/", (req, res) => {
 //   res.send("testing read!");
 // });
