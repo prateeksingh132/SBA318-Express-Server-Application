@@ -13,20 +13,23 @@ import { globalErr } from "./middleware/error.js";
 
 
 ///////// Import routes
-
+import productRoutes from "./routes/productRoutes.js";
 
 ///////// Import file handler
-
+import fs from "fs";
 
 // Import Database
-
+import { products, users, reviews } from "./database/data.js";
 
 /////// Setups
 const PORT = 3000;
 const app = express();
 
 
-/////// (Request) Middleware
+////////// Middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 // my logging middleware (requirement)
 app.use(logReq);
 
@@ -41,7 +44,10 @@ app.use(logReq);
 /////// Route
 
 
+
+
 //////////TESTING
+//app.use("/products", productRoutes);
 // app.get("/", (req, res) => {
 //   res.send("testing read!");
 // });
