@@ -3,14 +3,15 @@
 ////// Project: GadgetShack (Backend Layer)
 
 
+////////////////////////////////////////// Imports
+////////////////////////////////////////// 
 import express from "express";
 
 ///////// Import Logging Middleware
 import { logReq } from "./middleware/logger.js";
 
 ///////// Import Error Handling Middleware
-import { globalErr } from "./middleware/error.js";
-
+import { globalErr, error404 } from "./middleware/error.js";
 
 ///////// Import routes
 import productRoutes from "./routes/productRoutes.js";
@@ -23,6 +24,7 @@ import { products, users, reviews } from "./database/data.js";
 
 // i need method-override to use PUT and DELETE in html forms
 import methodOverride from "method-override";
+
 
 ////////////////////////////////////////// Setups
 ////////////////////////////////////////// 
@@ -44,7 +46,7 @@ app.use(express.json());
 app.use(methodOverride('_method'));
 
 
-// my logging middleware (requirement)
+// my logging middleware (requirement) - Custome middleware # 1
 app.use(logReq);
 
 
@@ -135,6 +137,13 @@ app.use("/products", productRoutes);
 //////////////////////////////////////// Error Handling Middleware
 ////////////////////////////////////////
 // this has to be at the end, after all routes
+
+// 404 Handler - Custom middleware # 2
+// this will run when no route above matches the url
+app.use(error404);
+
+// Requirement: Create and use error-handling middleware.
+// Global error handler: this will catch any errors passed from error404 or other routes
 app.use(globalErr);
 
 
