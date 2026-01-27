@@ -53,22 +53,24 @@ export const getAllProducts = (req, res) => {
     }
     productsHtml += `</div>`;
 
-    //////////// TESTING
+    
     // adding this 'add product' form at the bottom of page
+    // Requirement: Create and use error-handling middleware.
+    // Note: I have removed the 'required' from the add-product form below so that i can show error handling middleware usage. 
     productsHtml += `
         <div class="form-container">
             <h2>Add New Gadget</h2>
             <form action="/products" method="POST">
-                <input type="text" name="name" placeholder="Product Name" required />
+                <input type="text" name="name" placeholder="Product Name"  />
                 <input type="text" name="category" placeholder="Category (laptops/smartphones)" />
-                <input type="number" name="price" placeholder="Price" required />
+                <input type="number" name="price" placeholder="Price"  />
                 <button type="submit">Add Item</button>
             </form>
         </div>
     `;
     ////////////
 
-    // TESTING: i am passing to my view engine a title and this html string to put inside #content#
+    // i am passing to my view engine a title and this html string to put inside #content#
     res.render("index", { title: "Shop Products", content: productsHtml });
 
 };
@@ -78,28 +80,37 @@ export const createProduct = (req, res, next) => {
 
     // Goal: I am going to add the ability to add (create) items.
 
-    // logic: simple validation
-    // if user didn't send a name or price, we don't add it.
-    if (!req.body.name || !req.body.price) {
-        // just sendng a error. i will add proper error handling later
-        // FUTUREWORK: add proper error handling here
-        return res.send("Error: Name and Price are required.");
+
+    try {
+
+        // logic: simple validation
+        // if user didn't send a name or price, we don't add it.
+        if (!req.body.name || !req.body.price) {
+            // creating an error object with status and message
+            const err = new Error("Name and Price are required!!!!!");
+            err.status = 400;
+            throw err; // sending to error middleware
+        }
+
+        const newProduct = {
+            // simple id generation: just take length + 1
+            id: products.length + 1,
+            name: req.body.name,
+            category: req.body.category || "General",
+            price: req.body.price
+        };
+
+        // push to our array (mock db in data.js)
+        products.push(newProduct);
+
+        // after adding, go back to the main list so user can see it
+        res.redirect("/products");
+
+    } catch (error) {
+
+        next(error);
+
     }
-
-    const newProduct = {
-        // simple id generation: just take length + 1
-        id: products.length + 1,
-        name: req.body.name,
-        category: req.body.category || "General",
-        price: req.body.price
-    };
-
-    // push to our array (mock db in data.js)
-    products.push(newProduct);
-
-    // after adding, go back to the main list so user can see it
-    res.redirect("/products");
-
 
 };
 
