@@ -189,15 +189,31 @@ button {
     text-decoration: underline;
 }
 
+.itemImage {
+    width: 100%;
+    height: 200px;
+    object-fit: contain; /* keeps image ratio intact */
+    padding: 15px;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+}
 
 /* --------------  Forms --------------  */
-.form-container {
+.form-container, .add-section {
     background: white;
     padding: 20px;
     margin: 20px auto;
     border-radius: 8px;
     max-width: 500px;
     border-top: 4px solid #ff6600;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Animation: hover on form effect */
+.form-container:hover, .add-section:hover {
+    transform: translateY(-5px);
+    /* moves up slightly */
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
 }
 
 input {

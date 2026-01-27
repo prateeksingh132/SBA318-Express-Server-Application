@@ -24,12 +24,14 @@ import { products, users, reviews } from "./database/data.js";
 // i need method-override to use PUT and DELETE in html forms
 import methodOverride from "method-override";
 
-/////// Setups
+////////////////////////////////////////// Setups
+////////////////////////////////////////// 
 const PORT = 3000;
 const app = express();
 
 
-////////// Middleware
+//////////////////////////////////////// Middleware
+////////////////////////////////////////
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -46,7 +48,8 @@ app.use(methodOverride('_method'));
 app.use(logReq);
 
 
-/////// View
+//////////////////////////////////////// View
+//////////////////////////////////////// 
 // logic: creating a view engine to read .html files
 // i am using the exact logic from the warmup SBA here.
 app.engine("html", function (filePath, options, cb) {
@@ -75,34 +78,69 @@ app.engine("html", function (filePath, options, cb) {
 app.set("views", "./views");
 app.set("view engine", "html");
 app.use(express.static("./styles")); // serve static files from the styles directory
+app.use(express.static("./images"));
 
 
-/////// Route
+//////////////////////////////////////// Route
+//////////////////////////////////////// 
+// homepage route of my view
+// creating the base route for my homepage here. it has links to the products page
+// i am creating my homepage html content here dynamically to inject into my view (index.html)
+// i have also added 3 filter buttons just like SBA 308A, to filter all products, laptops and phones based on categories.
+app.get("/", (req, res) => {
+    
+    let homeHtml = `
+        <div class="hero">
+            <h1>Welcome to GadgetShack API</h1>
+            <p>Upgrade your tech life today.</p>
+            <div class="hero-actions">
+                <a href="/products" class="btn shop-btn">View All Products</a>
+                <a href="/products?category=laptops" class="btn filter-btn">Laptops</a>
+                <a href="/products?category=smartphones" class="btn filter-btn">Phones</a>
+            </div>
+            
+            <div class="add-section">
+                <h3>Admin Panel: Add New</h3>
+                <form action="/products" method="POST" class="add-form">
+                    <input type="text" name="name" placeholder="Product Name" required />
+                    <input type="text" name="category" placeholder="Category" required />
+                    <input type="number" name="price" placeholder="Price" required />
+                    <button type="submit">Add Item</button>
+                </form>
+            </div>
+        </div>
+    `;
 
+    res.render("index", { title: "Home", content: homeHtml });
 
+});
 
-
-//////////TESTING
-app.use("/products", productRoutes);
-
+////////////TESTING
 // app.get("/", (req, res) => {
 //     res.send("<h1>TESTING: Server is working!</h1><a href='/products'>Go to Products</a>");
 // });
+////////////TESTING
+
+
+// product page route of my view
+app.use("/products", productRoutes);
+
+////////////TESTING
 // app.get("/", (req, res) => {
 //   res.send("testing read!");
 // });
-//////////
+////////////TESTING
 
 
-
-
-/////// Error Handling Middleware
+//////////////////////////////////////// Error Handling Middleware
+////////////////////////////////////////
 // this has to be at the end, after all routes
 app.use(globalErr);
 
 
 
-/////// Listener
+////////////////////////////////////////// Listener
+////////////////////////////////////////// 
 app.listen(PORT, () => {
     console.log(`Server is running on PORT: ${PORT}`);
 });

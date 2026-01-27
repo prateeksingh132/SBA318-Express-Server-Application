@@ -14,7 +14,7 @@ export const products = [
         category: "laptops",
         price: 1200,
         description: "High performance gaming laptop with RGB keys.High performance gaming laptop with RGB keys.High performance gaming laptop with RGB keys.High performance gaming laptop with RGB keys.High performance gaming laptop with RGB keys.High performance gaming laptop with RGB keys.High performance gaming laptop with RGB keys.High performance gaming laptop with RGB keys.High performance gaming laptop with RGB keys.High performance gaming laptop with RGB keys.",
-        image: "laptop.jpg"
+        image: "/laptop.jpg"
     },
     {
         id: 2,
@@ -22,7 +22,7 @@ export const products = [
         category: "smartphones",
         price: 800,
         description: "Latest 5G technology with amazing camera.",
-        image: "phone.jpg"
+        image: "/phone.jpg"
     },
     {
         id: 3,
@@ -30,7 +30,7 @@ export const products = [
         category: "audio",
         price: 150,
         description: "Noise cancelling headphones.",
-        image: "headset.jpg"
+        image: "/headset.jpg"
     }
 ];
 

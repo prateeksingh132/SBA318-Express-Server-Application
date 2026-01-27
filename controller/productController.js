@@ -37,6 +37,7 @@ export const getAllProducts = (req, res) => {
         productsHtml += `
             <div class="card">
                 <h3>${p.name}</h3>
+                <img src="${p.image}" alt="${p.name}" class="itemImage">
                 <p class="price">$${p.price}</p>
                 <p class="category">${p.category}</p>
                 <p class="card-description">${p.description}</p>
