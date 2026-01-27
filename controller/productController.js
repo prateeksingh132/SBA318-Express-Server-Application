@@ -40,6 +40,11 @@ export const getAllProducts = (req, res) => {
                 <p class="price">$${p.price}</p>
                 <p class="category">${p.category}</p>
                 <p>${p.description}</p>
+
+                <form action="/products/${p.id}?_method=DELETE" method="POST">
+                    <button type="submit" class="delete-btn">Delete</button>
+                </form>
+
             </div>
         `;
     }
@@ -96,7 +101,28 @@ export const createProduct = (req, res, next) => {
 };
 
 // delete product
+// the issue is that to delete an item from an array, i first need to find its index (position).
+// i cannot delete directly by id, so i use findindex() to get the position, then splice() to remove it.
+// i referred this sample example on stackoverflow that did the same: - https://stackoverflow.com/questions/15287865/remove-array-element-based-on-object-property
 export const deleteProduct = (req, res) => {
+
+    // getting the id from the url params
+    const id = parseInt(req.params.id);
+
+    // finding which index to delete
+    // now, find() will give me the object, findindex(0) gives the position number
+    const index = products.findIndex(p => p.id === id);
+
+    if (index !== -1) {
+        products.splice(index, 1); // remove 1 item at that index
+
+        ////////////TESTING
+        // console.log(`Deleted product with id: ${id}`);
+        ////////////TESTING
+    }
+
+    // after deleting, go back to the list
+    res.redirect("/products");
 
 };
 

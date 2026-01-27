@@ -21,6 +21,9 @@ import fs from "fs";
 // Import Database
 import { products, users, reviews } from "./database/data.js";
 
+// i need method-override to use PUT and DELETE in html forms
+import methodOverride from "method-override";
+
 /////// Setups
 const PORT = 3000;
 const app = express();
@@ -29,6 +32,15 @@ const app = express();
 ////////// Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+
+// Middleware for method-override
+// Logic: so, i found out that html forms only support get and post, but i need delete and put for my REST API
+// i found that method-override will let me use a query parameter (like ?_method=DELETE) to kind of trick the server.
+// i found this sample example on stackoverflow that did the same: https://stackoverflow.com/questions/72611507/form-delete-method-is-redirecting-to-the-get-method-instead-in-express-js
+// i referred this tutorial as well: https://dev.to/moz5691/method-override-for-put-and-delete-in-html-3fp2
+app.use(methodOverride('_method'));
+
 
 // my logging middleware (requirement)
 app.use(logReq);
