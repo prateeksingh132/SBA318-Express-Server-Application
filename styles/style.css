@@ -138,17 +138,19 @@ body {
 }
 
 .category {
-    background-color: #f0f0f0; /* slightly lighter grey */
+    background-color: #f0f0f0;
+    /* slightly lighter grey */
     display: inline-block;
-    padding: 4px 10px;     
-    border-radius: 15px; 
-    font-size: 0.85rem; 
-    color: #666;  
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    color: #666;
     font-weight: bold;
-    
+
     /* adding space above and below so it doesnt touch the price/text */
-    margin: 10px 0;           
-    align-self: flex-start; /* this solved the category taking whole horizontal space in the card*/
+    margin: 10px 0;
+    align-self: flex-start;
+    /* this solved the category taking whole horizontal space in the card*/
 }
 
 .card-description {
@@ -192,25 +194,28 @@ button {
 .itemImage {
     width: 100%;
     height: 200px;
-    object-fit: contain; /* keeps image ratio intact */
+    object-fit: contain;
+    /* keeps image ratio intact */
     padding: 15px;
     background-color: #fff;
     border-bottom: 1px solid #eee;
 }
 
 /* --------------  Forms --------------  */
-.form-container, .add-section {
+.form-container,
+.add-section {
     background: white;
     padding: 20px;
     margin: 20px auto;
     border-radius: 8px;
     max-width: 500px;
-    border-top: 4px solid #ff6600;
+    /* border-top: 4px solid #ff6600; */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* Animation: hover on form effect */
-.form-container:hover, .add-section:hover {
+.form-container:hover,
+.add-section:hover {
     transform: translateY(-5px);
     /* moves up slightly */
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
@@ -222,6 +227,53 @@ input {
     margin: 5px 0 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+
+/* -------------- Users and Reviews styling-------------- */
+.extra-data-container {
+    background: white;
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Animation: hover on card effect */
+.extra-data-container:hover{
+    transform: translateY(-5px);
+    /* moves up slightly */
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+.extra-data-container h2 {
+    color: #003366;
+    border-bottom: 2px solid #ff6600;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.data-list li {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+    color: #555;
+}
+
+/* Review section styling */
+/* similar to product-cards-div but simpler */
+.reviews-cards-div {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.review-item-box {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 

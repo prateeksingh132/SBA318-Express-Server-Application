@@ -4,7 +4,7 @@
 // i separated this from the routes file to keep my code organized (modularization).
 // this will help in later as well during capstone when logic gets complicated.
 
-import { products } from "../database/data.js";
+import { products, users, reviews } from "../database/data.js";
 
 // get all products (with filtering)
 export const getAllProducts = (req, res) => {
@@ -30,6 +30,9 @@ export const getAllProducts = (req, res) => {
     // res.json(displayProducts);
     ////////////TESTING
 
+    // Requirement: Use at least three different data categories (e.g., users, posts, or comments).
+    // i have three different data categories: Product, User and Reviews. imported user, reviews and product from my mock db data.js
+    // i am gonna use and display all three of them on my view
     // Goal: i need to create html string to send to the view engine
     let productsHtml = `<div class="product-cards-div">`;
 
@@ -53,7 +56,44 @@ export const getAllProducts = (req, res) => {
     }
     productsHtml += `</div>`;
 
-    
+
+    // User section
+    productsHtml += `
+        <div class="extra-data-container">
+            <h2>Community Members</h2>
+            <ul class="data-list">
+    `;
+    // looping through users array
+    for (const u of users) {
+        productsHtml += `<li><strong>${u.username}</strong> (${u.email})</li>`;
+    }
+    productsHtml += `</ul></div>`;
+
+    // Reviews section
+    // listing reviews
+    productsHtml += `
+        <div class="extra-data-container">
+            <h2>Recent Reviews</h2>
+            <div class="reviews-cards-div">
+    `;
+    // looping through reviews array
+    for (const r of reviews) {
+        // finding the product name to add below the review as context
+        const product = products.find(p => p.id === r.productId);
+        const productName = product ? product.name : "Unknown Item";
+
+        productsHtml += `
+            <div class="review-item-box">
+                <p><strong>Rating:</strong> ${r.rating}/5 ⭐</p>
+                <p>"${r.text}"</p>
+                <small>For: ${productName}</small>
+            </div>
+        `;
+    }
+    productsHtml += `</div></div>`;
+
+
+
     // adding this 'add product' form at the bottom of page
     // Requirement: Create and use error-handling middleware.
     // Note: I have removed the 'required' from the add-product form below so that i can show error handling middleware usage. 
@@ -80,7 +120,7 @@ export const createProduct = (req, res, next) => {
 
     // Goal: I am going to add the ability to add (create) items.
 
-
+    // Requirement: Create and use error-handling middleware.
     try {
 
         // logic: simple validation
