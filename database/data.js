@@ -13,7 +13,7 @@ export const products = [
         name: "Gaming Laptop",
         category: "laptops",
         price: 1200,
-        description: "High performance gaming laptop with RGB keys.",
+        description: "High performance gaming laptop with RGB keys.High performance gaming laptop with RGB keys.High performance gaming laptop with RGB keys.High performance gaming laptop with RGB keys.High performance gaming laptop with RGB keys.High performance gaming laptop with RGB keys.High performance gaming laptop with RGB keys.High performance gaming laptop with RGB keys.High performance gaming laptop with RGB keys.High performance gaming laptop with RGB keys.",
         image: "laptop.jpg"
     },
     {

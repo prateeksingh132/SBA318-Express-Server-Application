@@ -31,7 +31,7 @@ export const getAllProducts = (req, res) => {
     ////////////TESTING
 
     // Goal: i need to create html string to send to the view engine
-    let productsHtml = `<div class="product-grid">`;
+    let productsHtml = `<div class="product-cards-div">`;
 
     for (let p of displayProducts) {
         productsHtml += `
@@ -39,13 +39,13 @@ export const getAllProducts = (req, res) => {
                 <h3>${p.name}</h3>
                 <p class="price">$${p.price}</p>
                 <p class="category">${p.category}</p>
-                <p>${p.description}</p>
+                <p class="card-description">${p.description}</p>
 
                 <form action="/products/${p.id}?_method=DELETE" method="POST">
                     <button type="submit" class="delete-btn">Delete</button>
                 </form>
 
-                <a href="/products/${p.id}/edit">Edit</a>
+                <a href="/products/${p.id}/edit" class="edit-link">Edit</a>
 
             </div>
         `;
