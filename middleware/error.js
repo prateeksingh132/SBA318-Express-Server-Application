@@ -10,7 +10,7 @@ export function globalErr(err, req, res, next) {
     const status = err.status || 500;
     const message = err.message || "Server Error";
 
-    console.error(`ERROR CAUGHT: status - ${status}`);
+    console.error(`ERROR CAUGHT: status - ${status} - ${message}`);
 
 
     //////////TESTING
