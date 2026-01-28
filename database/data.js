@@ -55,7 +55,7 @@ export const reviews = [
         id: 1,
         productId: 1,
         userId: 1,
-        text: "Great Tech....",
+        text: "Great Tech. Great API....",
         rating: 5
     }
 ];
