@@ -13,7 +13,7 @@ export const products = [
         name: "Gaming Laptop",
         category: "laptops",
         price: 1200,
-        description: "High performance gaming laptop with RGB keys.High performance gaming laptop with RGB keys.High performance gaming laptop with RGB keys.High performance gaming laptop with RGB keys.High performance gaming laptop with RGB keys.High performance gaming laptop with RGB keys.High performance gaming laptop with RGB keys.High performance gaming laptop with RGB keys.High performance gaming laptop with RGB keys.High performance gaming laptop with RGB keys.",
+        description: "High performance gaming laptop with RGB keys.",
         image: "/laptop.jpg"
     },
     {
@@ -55,7 +55,7 @@ export const reviews = [
         id: 1,
         productId: 1,
         userId: 1,
-        text: "Runs Crysis perfectly.",
+        text: "Great Tech....",
         rating: 5
     }
 ];
